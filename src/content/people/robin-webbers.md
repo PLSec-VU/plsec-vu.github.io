@@ -2,6 +2,7 @@
 name: Robin Webbers
 role: PhD Student
 order: 10
+photo: /website/assets/img/people/robin-webbers.png
 interests:
   - refinement types
   - verification tools

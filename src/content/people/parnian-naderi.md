@@ -3,6 +3,7 @@ name: Parnian (Anna) Naderi
 role: PhD Student
 order: 50
 website: https://simplytypedexistence.github.io
+photo: /website/assets/img/people/parnian-naderi.jpeg
 aliases:
   - Parnian (Anna) Naderi
   - Anna Naderi

@@ -2,6 +2,8 @@
 name: Zunchen Huang
 role: Postdoc
 order: 60
+email: zunchen.huang@cwi.nl
+photo: /website/assets/img/people/zunchen-huang.jpg
 interests:
   - programming languages
   - security

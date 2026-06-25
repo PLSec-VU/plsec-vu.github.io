@@ -2,6 +2,7 @@
 name: Alp Adnan Basar
 role: PhD Student
 order: 20
+photo: /website/assets/img/people/alp-basar.jpeg
 interests:
   - programming languages
   - security

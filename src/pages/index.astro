@@ -20,8 +20,8 @@ const publications = (await getCollection('publications'))
   .slice(0, 3);
 
 const people = (await getCollection('people'))
+  .filter((person) => person.data.role !== 'Alumni')
   .sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name))
-  .slice(0, 6);
 
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;

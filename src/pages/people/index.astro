@@ -8,6 +8,14 @@ const people = (await getCollection('people')).sort((a, b) => a.data.order - b.d
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 const assetUrl = (path?: string) => path?.startsWith(base) ? path : path?.startsWith('/') ? withBase(path) : path;
+const initials = (name: string) =>
+  name
+    .replace(/\([^)]*\)/g, '')
+    .trim()
+    .split(/\s+/)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2);
 ---
 
 <BaseLayout title="People | PLSec at VU Amsterdam">
@@ -23,17 +31,31 @@ const assetUrl = (path?: string) => path?.startsWith(base) ? path : path?.starts
               {group.map(async (person) => {
                 const { Content } = await render(person);
                 const personHref = person.data.role === 'Alumni' ? person.data.website : withBase(`/people/${person.id}/`);
+                const showPortrait = person.data.role !== 'Alumni';
                 return (
                   <article class="card person">
-                    {person.data.photo && personHref && (
+                    {showPortrait && person.data.photo && personHref && (
                       <a href={personHref} aria-label={`View ${person.data.name}`}>
                         <img class="person-photo" src={assetUrl(person.data.photo)} alt="" />
                       </a>
                     )}
-                    {person.data.photo && !personHref && <img class="person-photo" src={assetUrl(person.data.photo)} alt="" />}
+                    {showPortrait && person.data.photo && !personHref && <img class="person-photo" src={assetUrl(person.data.photo)} alt="" />}
+                    {showPortrait && !person.data.photo && personHref && (
+                      <a href={personHref} aria-label={`View ${person.data.name}`}>
+                        <div class="person-photo person-initials" aria-hidden="true">
+                          {initials(person.data.name)}
+                        </div>
+                      </a>
+                    )}
+                    {showPortrait && !person.data.photo && !personHref && (
+                      <div class="person-photo person-initials" aria-hidden="true">
+                        {initials(person.data.name)}
+                      </div>
+                    )}
                     <h3>{personHref ? <a href={personHref}>{person.data.name}</a> : person.data.name}</h3>
                     <Content />
-                    {person.data.website && person.data.role !== 'Alumni' && <a href={person.data.website}>Personal website</a>}
+                    {person.data.email && <a href={`mailto:${person.data.email}`}>Contact</a>}
+                    {person.data.website && <a href={person.data.website}>Personal website</a>}
                     {person.data.interests.length > 0 && (
                       <div class="tags">
                         {person.data.interests.map((interest) => <span>{interest}</span>)}

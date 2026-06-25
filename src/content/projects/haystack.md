@@ -1,7 +1,7 @@
 ---
 title: Haystack
 summary: Interactive explanations for refinement type checking failures.
-status: Active
+status: Completed
 people:
   - Robin Webbers
   - Klaus v. Gleissenthall

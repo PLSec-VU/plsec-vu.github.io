@@ -3,6 +3,7 @@ name: Luís Ferreirinha
 role: PhD Student
 order: 30
 website: https://lpferreirinha.com
+photo: /website/assets/img/people/luis-ferreirinha.webp
 aliases:
   - Luis Ferreirinha
 interests:
