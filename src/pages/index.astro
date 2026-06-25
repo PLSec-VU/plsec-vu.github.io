@@ -26,6 +26,14 @@ const people = (await getCollection('people'))
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 const assetUrl = (path?: string) => path?.startsWith(base) ? path : path?.startsWith('/') ? withBase(path) : path;
+const initials = (name: string) =>
+  name
+    .replace(/\([^)]*\)/g, '')
+    .trim()
+    .split(/\s+/)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2);
 ---
 
 <BaseLayout>
@@ -94,7 +102,7 @@ const assetUrl = (path?: string) => path?.startsWith(base) ? path : path?.starts
                     <img src={assetUrl(person.data.photo)} alt="" />
                   ) : (
                     <div class="person-initials" aria-hidden="true">
-                      {person.data.name.split(' ').map((part) => part[0]).join('').slice(0, 2)}
+                      {initials(person.data.name)}
                     </div>
                   )}
                 </a>
@@ -102,7 +110,7 @@ const assetUrl = (path?: string) => path?.startsWith(base) ? path : path?.starts
                 <img src={assetUrl(person.data.photo)} alt="" />
               ) : (
                 <div class="person-initials" aria-hidden="true">
-                  {person.data.name.split(' ').map((part) => part[0]).join('').slice(0, 2)}
+                  {initials(person.data.name)}
                 </div>
               )}
               <div>

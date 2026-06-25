@@ -12,6 +12,14 @@ const { Content } = await render(person);
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 const assetUrl = (path?: string) => path?.startsWith(base) ? path : path?.startsWith('/') ? withBase(path) : path;
+const initials = (name: string) =>
+  name
+    .replace(/\([^)]*\)/g, '')
+    .trim()
+    .split(/\s+/)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2);
 ---
 
 <BaseLayout title={`${person.data.name} | PLSec at VU Amsterdam`}>
@@ -21,7 +29,7 @@ const assetUrl = (path?: string) => path?.startsWith(base) ? path : path?.starts
         <img class="profile-photo" src={assetUrl(person.data.photo)} alt="" />
       ) : (
         <div class="profile-photo person-initials" aria-hidden="true">
-          {person.data.name.split(' ').map((part) => part[0]).join('').slice(0, 2)}
+          {initials(person.data.name)}
         </div>
       )}
       <div>
