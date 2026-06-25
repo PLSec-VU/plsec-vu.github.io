@@ -1,0 +1,156 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsCard from '../components/NewsCard.astro';
+
+const posts = (await getCollection('posts'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const news = (await getCollection('news'))
+  .filter((item) => !item.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const publications = (await getCollection('publications'))
+  .filter((pub) => pub.data.featured)
+  .sort((a, b) => b.data.year - a.data.year)
+  .slice(0, 3);
+
+const people = (await getCollection('people'))
+  .sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name))
+  .slice(0, 6);
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">Programming Languages and Security at VU Amsterdam</p>
+        <h1>PLSec@VU Amsterdam</h1>
+        <p class="lead">
+          We study programming languages, verification, type systems, and systems security, building foundations and tools for secure and reliable software.
+        </p>
+        <div class="actions">
+          <a class="button" href="/publications/">View publications</a>
+          <a class="button secondary" href="/join/">Work with us</a>
+        </div>
+      </div>
+      <aside class="hero-panel">
+        <h2>Research Themes</h2>
+        <p>Type systems, program verification, secure compilation, language-based security, and practical tools for debugging verification failures.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Research Areas</h2>
+          <p>Core directions for current and upcoming work.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>Program Verification</h3>
+          <p>Methods for proving correctness properties of real programs while keeping feedback useful for developers.</p>
+        </article>
+        <article class="card">
+          <h3>Types and Semantics</h3>
+          <p>Foundations and implementations for type systems, refinement typing, and semantic reasoning.</p>
+        </article>
+        <article class="card">
+          <h3>Security and Systems</h3>
+          <p>Language-based techniques that improve software security across compilers, runtimes, and systems.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Team</h2>
+          <p>Researchers and students in the group.</p>
+        </div>
+        <a href="/people/">All people</a>
+      </div>
+      <div class="team-strip">
+        {people.map((person) => (
+          <article class="team-member">
+            {person.data.photo ? (
+              <img src={person.data.photo} alt="" />
+            ) : (
+              <div class="person-initials" aria-hidden="true">
+                {person.data.name.split(' ').map((part) => part[0]).join('').slice(0, 2)}
+              </div>
+            )}
+            <div>
+              <h3>{person.data.name}</h3>
+              <p>{person.data.role}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Selected Publications</h2>
+          <p>Recent work from the group.</p>
+        </div>
+        <a href="/publications/">All publications</a>
+      </div>
+      <div class="list">
+        {publications.map((pub) => (
+          <article class="card publication">
+            <h3>{pub.data.title}</h3>
+            <div class="authors">{pub.data.authors.join(', ')}</div>
+            <div class="venue">{pub.data.venue}, {pub.data.year}</div>
+            {pub.data.links.length > 0 && (
+              <div class="tags">
+                {pub.data.links.map((link) => <a href={link.url}>{link.label}</a>)}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Latest Posts</h2>
+          <p>Research explainers, technical articles, and project deep dives.</p>
+        </div>
+        <a href="/posts/">All posts</a>
+      </div>
+      <div class="grid">
+        {posts.map((post) => <NewsCard item={post} basePath="posts" />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>News</h2>
+          <p>Short updates from the group.</p>
+        </div>
+        <a href="/news/">All news</a>
+      </div>
+      <div class="grid">
+        {news.map((item) => <NewsCard item={item} basePath="news" />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

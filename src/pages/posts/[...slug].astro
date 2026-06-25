@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('posts')).filter((post) => !post.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const date = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(post.data.date);
+---
+
+<BaseLayout title={`${post.data.title} | PLSec at VU Amsterdam`} description={post.data.summary}>
+  <article>
+    <section class="page-header">
+      <div class="container narrow">
+        <p class="eyebrow">{date}</p>
+        <h1>{post.data.title}</h1>
+        <p class="lead">{post.data.summary}</p>
+        {post.data.authors.length > 0 && <p class="meta">By {post.data.authors.join(', ')}</p>}
+      </div>
+    </section>
+    <section class="section">
+      <div class="container prose">
+        <Content />
+      </div>
+    </section>
+  </article>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+
+const roleOrder = ['Faculty', 'Postdoc', 'PhD Student', 'Researcher', 'MSc Student', 'Alumni'];
+const people = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name));
+---
+
+<BaseLayout title="People | PLSec at VU Amsterdam">
+  <PageHeader title="People" intro="Researchers, students, collaborators, and alumni connected to the group." />
+  <section class="section">
+    <div class="container">
+      {roleOrder.map((role) => {
+        const group = people.filter((person) => person.data.role === role);
+        return group.length > 0 && (
+          <>
+            <h2 class="role-heading">{role}</h2>
+            <div class="grid">
+              {group.map(async (person) => {
+                const { Content } = await render(person);
+                return (
+                  <article class="card person">
+                    {person.data.photo && <img class="person-photo" src={person.data.photo} alt="" />}
+                    <h3>{person.data.website ? <a href={person.data.website}>{person.data.name}</a> : person.data.name}</h3>
+                    <Content />
+                    {person.data.interests.length > 0 && (
+                      <div class="tags">
+                        {person.data.interests.map((interest) => <span>{interest}</span>)}
+                      </div>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+          </>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

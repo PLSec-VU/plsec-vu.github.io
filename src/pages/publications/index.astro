@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+
+const publications = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title));
+const years = [...new Set(publications.map((pub) => pub.data.year))];
+---
+
+<BaseLayout title="Publications | PLSec at VU Amsterdam">
+  <PageHeader title="Publications" intro="Papers, preprints, artifacts, and tools from the group." />
+  <section class="section">
+    <div class="container">
+      {years.map((year) => (
+        <>
+          <h2 class="role-heading">{year}</h2>
+          <div class="list">
+            {publications.filter((pub) => pub.data.year === year).map((pub) => (
+              <article class="card publication">
+                <h3>{pub.data.title}</h3>
+                <div class="authors">{pub.data.authors.join(', ')}</div>
+                <div><span class="venue">{pub.data.venue}</span></div>
+                {pub.data.links.length > 0 && (
+                  <div class="tags">
+                    {pub.data.links.map((link) => <a href={link.url}>{link.label}</a>)}
+                  </div>
+                )}
+              </article>
+            ))}
+          </div>
+        </>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

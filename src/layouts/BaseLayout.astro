@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+
+const {
+  title = 'PLSec at VU Amsterdam',
+  description = 'Research group website for programming languages, security, and software correctness at VU Amsterdam.'
+} = Astro.props;
+
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/people/', label: 'People' },
+  { href: '/publications/', label: 'Publications' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/posts/', label: 'Posts' },
+  { href: '/news/', label: 'News' },
+  { href: '/join/', label: 'Join' }
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <script is:inline>
+      const storedTheme = localStorage.getItem('theme');
+      const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = storedTheme || preferredTheme;
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="PLSec home">
+          <img src="/assets/img/vu.png" alt="" />
+          <span>
+            <strong>PLSec@VU</strong>
+          </span>
+        </a>
+        <nav aria-label="Main navigation">
+          {nav.map((item) => (
+            <a href={item.href} class={Astro.url.pathname === item.href ? 'active' : ''}>{item.label}</a>
+          ))}
+        </nav>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" data-theme-toggle>
+          <span class="theme-toggle-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>PLSec at VU Amsterdam</strong>
+          <p>Programming languages, security, verification, and systems research.</p>
+        </div>
+        <div>
+          <span>Faculty of Science</span>
+          <span>Vrije Universiteit Amsterdam</span>
+        </div>
+      </div>
+    </footer>
+    <script is:inline>
+      const toggle = document.querySelector('[data-theme-toggle]');
+      const setTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem('theme', theme);
+      };
+      toggle?.addEventListener('click', () => {
+        setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+      });
+    </script>
+  </body>
+</html>

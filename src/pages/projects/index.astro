@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<BaseLayout title="Projects | PLSec at VU Amsterdam">
+  <PageHeader title="Projects" intro="Research directions, funded work, prototypes, and collaborations." />
+  <section class="section">
+    <div class="container grid two">
+      {projects.map(async (project) => {
+        const { Content } = await render(project);
+        return (
+          <article class="card">
+            <p class="meta">{project.data.status}</p>
+            <h3>{project.data.title}</h3>
+            <p>{project.data.summary}</p>
+            <div class="prose"><Content /></div>
+            {project.data.links.length > 0 && (
+              <div class="tags">
+                {project.data.links.map((link) => <a href={link.url}>{link.label}</a>)}
+              </div>
+            )}
+          </article>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>
