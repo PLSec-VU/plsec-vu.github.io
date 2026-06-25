@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import AuthorList from './AuthorList.astro';
 
 interface Props {
   item: CollectionEntry<'news'> | CollectionEntry<'posts'>;
@@ -16,6 +17,9 @@ const href = 'link' in item.data && item.data.link ? item.data.link : withBase(`
 <article class="card news-card">
   <p class="meta">{date}</p>
   <h3><a href={href}>{item.data.title}</a></h3>
+  {'authors' in item.data && item.data.authors.length > 0 && (
+    <p class="byline"><AuthorList authors={item.data.authors} prefix="By " /></p>
+  )}
   <p>{item.data.summary}</p>
   {'tags' in item.data && item.data.tags.length > 0 && (
     <div class="tags">

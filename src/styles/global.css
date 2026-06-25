@@ -301,6 +301,11 @@ h3 {
   margin: 10px 0 0;
 }
 
+.byline {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .meta {
   color: var(--gold);
   font-size: 0.88rem;
@@ -374,6 +379,10 @@ h3 {
   align-content: start;
 }
 
+.team-photo-link {
+  display: block;
+}
+
 .team-member img,
 .person-initials {
   width: 100%;
@@ -401,6 +410,22 @@ h3 {
   margin: 4px 0 0;
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+.person-profile {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.profile-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background: var(--white);
 }
 
 .role-heading {
@@ -470,8 +495,14 @@ h3 {
   .hero-grid,
   .grid,
   .grid.two,
-  .team-strip {
+  .team-strip,
+  .person-profile {
     grid-template-columns: 1fr;
+  }
+
+  .profile-photo {
+    width: 132px;
+    height: 132px;
   }
 
   .hero {

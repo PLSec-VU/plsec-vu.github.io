@@ -5,6 +5,8 @@ order: 1
 email: kfl900@vu.nl
 website: https://gleissen.github.io
 photo: /website/assets/img/vu.png
+aliases:
+  - Klaus von Gleissenthall
 interests:
   - programming languages
   - verification

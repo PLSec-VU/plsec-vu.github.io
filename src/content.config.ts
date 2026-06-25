@@ -7,6 +7,7 @@ const news = defineCollection({
     title: z.string(),
     summary: z.string(),
     date: z.coerce.date(),
+    authors: z.array(z.string()).default([]),
     link: z.string().url().optional(),
     draft: z.boolean().default(false)
   })
@@ -34,6 +35,7 @@ const people = defineCollection({
     email: z.string().email().optional(),
     website: z.string().url().optional(),
     photo: z.string().optional(),
+    aliases: z.array(z.string()).default([]),
     interests: z.array(z.string()).default([])
   })
 });

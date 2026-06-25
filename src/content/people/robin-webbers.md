@@ -7,4 +7,4 @@ interests:
   - verification tools
 ---
 
-Works on tools and techniques for explaining program verification failures.
+PhD student since 2022, working on tools and techniques for explaining program verification failures.

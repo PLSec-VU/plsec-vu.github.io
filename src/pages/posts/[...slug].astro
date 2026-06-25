@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthorList from '../../components/AuthorList.astro';
 
 export async function getStaticPaths() {
   const posts = (await getCollection('posts')).filter((post) => !post.data.draft);
@@ -19,7 +20,7 @@ const date = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day
         <p class="eyebrow">{date}</p>
         <h1>{post.data.title}</h1>
         <p class="lead">{post.data.summary}</p>
-        {post.data.authors.length > 0 && <p class="meta">By {post.data.authors.join(', ')}</p>}
+        {post.data.authors.length > 0 && <p class="meta"><AuthorList authors={post.data.authors} prefix="By " /></p>}
       </div>
     </section>
     <section class="section">

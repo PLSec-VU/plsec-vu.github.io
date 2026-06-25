@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  authors: string[];
+  prefix?: string;
+  className?: string;
+}
+
+const { authors, prefix = '', className = 'authors' } = Astro.props as Props;
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+const normalize = (value: string) =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[().]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+
+const people = await getCollection('people');
+const peopleByName = new Map();
+
+for (const person of people) {
+  for (const name of [person.data.name, ...person.data.aliases]) {
+    peopleByName.set(normalize(name), person);
+  }
+}
+
+const hrefFor = (author: string) => {
+  const person = peopleByName.get(normalize(author));
+  if (!person) return undefined;
+  if (person.data.role === 'Alumni') return person.data.website;
+  return withBase(`/people/${person.id}/`);
+};
+---
+
+{authors.length > 0 && (
+  <span class={className}>
+    {prefix}
+    {authors.map((author, index) => {
+      const href = hrefFor(author);
+      return (
+        <>
+          {index > 0 && ', '}
+          {href ? <a href={href}>{author}</a> : author}
+        </>
+      );
+    })}
+  </span>
+)}

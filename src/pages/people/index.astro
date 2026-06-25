@@ -22,11 +22,18 @@ const assetUrl = (path?: string) => path?.startsWith(base) ? path : path?.starts
             <div class="grid">
               {group.map(async (person) => {
                 const { Content } = await render(person);
+                const personHref = person.data.role === 'Alumni' ? person.data.website : withBase(`/people/${person.id}/`);
                 return (
                   <article class="card person">
-                    {person.data.photo && <img class="person-photo" src={assetUrl(person.data.photo)} alt="" />}
-                    <h3>{person.data.website ? <a href={person.data.website}>{person.data.name}</a> : person.data.name}</h3>
+                    {person.data.photo && personHref && (
+                      <a href={personHref} aria-label={`View ${person.data.name}`}>
+                        <img class="person-photo" src={assetUrl(person.data.photo)} alt="" />
+                      </a>
+                    )}
+                    {person.data.photo && !personHref && <img class="person-photo" src={assetUrl(person.data.photo)} alt="" />}
+                    <h3>{personHref ? <a href={personHref}>{person.data.name}</a> : person.data.name}</h3>
                     <Content />
+                    {person.data.website && person.data.role !== 'Alumni' && <a href={person.data.website}>Personal website</a>}
                     {person.data.interests.length > 0 && (
                       <div class="tags">
                         {person.data.interests.map((interest) => <span>{interest}</span>)}
