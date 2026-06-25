@@ -1,6 +1,6 @@
 ---
-title: Group GitHub
-summary: Check out the group's GitHub repository.
+title: PLSec-VU on GitHub
+summary: Check out the group's GitHub repositories, tools, and artifacts.
 status: Active
 links:
   - label: GitHub

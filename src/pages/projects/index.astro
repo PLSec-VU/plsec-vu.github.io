@@ -3,13 +3,38 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 
-const projects = (await getCollection('projects')).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const allProjects = await getCollection('projects');
+const groupRepository = allProjects.find((project) => project.id === 'group-github');
+const projects = allProjects
+  .filter((project) => project.id !== 'group-github')
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 
 <BaseLayout title="Projects | PLSec at VU Amsterdam">
   <PageHeader title="Projects" intro="Research directions, funded work, prototypes, and collaborations." />
   <section class="section">
-    <div class="container grid two">
+    {groupRepository && (
+      <div class="container">
+        <article class="card project-feature">
+          <div class="project-feature-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M12 1.5C6.2 1.5 1.5 6.3 1.5 12.1c0 4.6 3 8.5 7.1 10 .5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.8.1-.7.4-1.1.7-1.3-2.3-.3-4.7-1.2-4.7-5.2 0-1.2.4-2.1 1.1-2.9-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 2.9 1.1.8-.2 1.7-.3 2.6-.3.9 0 1.8.1 2.6.3 2-1.4 2.9-1.1 2.9-1.1.6 1.5.2 2.6.1 2.9.7.8 1.1 1.7 1.1 2.9 0 4-2.4 4.9-4.7 5.2.4.3.7 1 .7 2v2.9c0 .3.2.6.7.5 4.1-1.4 7.1-5.3 7.1-10C22.5 6.3 17.8 1.5 12 1.5Z" />
+            </svg>
+          </div>
+          <div>
+            <p class="meta">Group repository</p>
+            <h2>{groupRepository.data.title}</h2>
+            <p>{groupRepository.data.summary}</p>
+          </div>
+          {groupRepository.data.links.length > 0 && (
+            <div class="project-feature-actions">
+              {groupRepository.data.links.map((link) => <a class="button" href={link.url}>{link.label}</a>)}
+            </div>
+          )}
+        </article>
+      </div>
+    )}
+    <div class="container grid two project-grid">
       {projects.map(async (project) => {
         const { Content } = await render(project);
         return (
