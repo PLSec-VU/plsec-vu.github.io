@@ -1,5 +1,5 @@
 ---
-name: Parnian Naderi
+name: Parnian (Anna) Naderi
 role: PhD Student
 order: 50
 website: https://simplytypedexistence.github.io
