@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthorList from '../../components/AuthorList.astro';
 
 export async function getStaticPaths() {
   const people = (await getCollection('people')).filter((person) => person.data.role !== 'Alumni');
@@ -12,6 +13,14 @@ const { Content } = await render(person);
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 const assetUrl = (path?: string) => path?.startsWith(base) ? path : path?.startsWith('/') ? withBase(path) : path;
+const normalize = (value: string) =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[().]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
 const initials = (name: string) =>
   name
     .replace(/\([^)]*\)/g, '')
@@ -20,6 +29,16 @@ const initials = (name: string) =>
     .map((part) => part[0])
     .join('')
     .slice(0, 2);
+
+const personNames = new Set([person.data.name, ...person.data.aliases].map(normalize));
+const authoredByPerson = (authors: string[]) => authors.some((author) => personNames.has(normalize(author)));
+const posts = (await getCollection('posts'))
+  .filter((post) => !post.data.draft && authoredByPerson(post.data.authors))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const publications = (await getCollection('publications'))
+  .filter((publication) => authoredByPerson(publication.data.authors))
+  .sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title));
+const formatDate = (date: Date) => new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
 ---
 
 <BaseLayout title={`${person.data.name} | PLSec at VU Amsterdam`}>
@@ -53,4 +72,51 @@ const initials = (name: string) =>
       )}
     </div>
   </section>
+
+  {(publications.length > 0 || posts.length > 0) && (
+    <section class="section alt">
+      <div class="container narrow">
+        {publications.length > 0 && (
+          <>
+            <h2 class="role-heading">Publications</h2>
+            <div class="list">
+              {publications.map((publication) => (
+                <article class="card publication">
+                  <h3>{publication.data.title}</h3>
+                  <div><AuthorList authors={publication.data.authors} /></div>
+                  <div class="venue">{publication.data.venue}, {publication.data.year}</div>
+                  {publication.data.links.length > 0 && (
+                    <div class="tags">
+                      {publication.data.links.map((link) => <a href={link.url}>{link.label}</a>)}
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </>
+        )}
+
+        {posts.length > 0 && (
+          <>
+            <h2 class="role-heading">Posts</h2>
+            <div class="list">
+              {posts.map((post) => (
+                <article class="card news-card">
+                  <p class="meta">{formatDate(post.data.date)}</p>
+                  <h3><a href={withBase(`/posts/${post.id}/`)}>{post.data.title}</a></h3>
+                  <p class="byline"><AuthorList authors={post.data.authors} prefix="By " /></p>
+                  <p>{post.data.summary}</p>
+                  {post.data.tags.length > 0 && (
+                    <div class="tags">
+                      {post.data.tags.map((tag) => <span>{tag}</span>)}
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+  )}
 </BaseLayout>
