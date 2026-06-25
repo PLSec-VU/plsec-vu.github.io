@@ -21,6 +21,10 @@ const publications = (await getCollection('publications'))
 const people = (await getCollection('people'))
   .sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name))
   .slice(0, 6);
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+const assetUrl = (path?: string) => path?.startsWith(base) ? path : path?.startsWith('/') ? withBase(path) : path;
 ---
 
 <BaseLayout>
@@ -33,8 +37,8 @@ const people = (await getCollection('people'))
           We study programming languages, verification, type systems, and systems security, building foundations and tools for secure and reliable software.
         </p>
         <div class="actions">
-          <a class="button" href="/publications/">View publications</a>
-          <a class="button secondary" href="/join/">Work with us</a>
+          <a class="button" href={withBase('/publications/')}>View publications</a>
+          <a class="button secondary" href={withBase('/join/')}>Work with us</a>
         </div>
       </div>
       <aside class="hero-panel">
@@ -76,13 +80,13 @@ const people = (await getCollection('people'))
           <h2>Team</h2>
           <p>Researchers and students in the group.</p>
         </div>
-        <a href="/people/">All people</a>
+        <a href={withBase('/people/')}>All people</a>
       </div>
       <div class="team-strip">
         {people.map((person) => (
           <article class="team-member">
             {person.data.photo ? (
-              <img src={person.data.photo} alt="" />
+              <img src={assetUrl(person.data.photo)} alt="" />
             ) : (
               <div class="person-initials" aria-hidden="true">
                 {person.data.name.split(' ').map((part) => part[0]).join('').slice(0, 2)}
@@ -105,7 +109,7 @@ const people = (await getCollection('people'))
           <h2>Selected Publications</h2>
           <p>Recent work from the group.</p>
         </div>
-        <a href="/publications/">All publications</a>
+        <a href={withBase('/publications/')}>All publications</a>
       </div>
       <div class="list">
         {publications.map((pub) => (
@@ -131,7 +135,7 @@ const people = (await getCollection('people'))
           <h2>Latest Posts</h2>
           <p>Research explainers, technical articles, and project deep dives.</p>
         </div>
-        <a href="/posts/">All posts</a>
+        <a href={withBase('/posts/')}>All posts</a>
       </div>
       <div class="grid">
         {posts.map((post) => <NewsCard item={post} basePath="posts" />)}
@@ -146,7 +150,7 @@ const people = (await getCollection('people'))
           <h2>News</h2>
           <p>Short updates from the group.</p>
         </div>
-        <a href="/news/">All news</a>
+        <a href={withBase('/news/')}>All news</a>
       </div>
       <div class="grid">
         {news.map((item) => <NewsCard item={item} basePath="news" />)}

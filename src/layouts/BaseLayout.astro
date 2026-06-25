@@ -15,6 +15,10 @@ const nav = [
   { href: '/news/', label: 'News' },
   { href: '/join/', label: 'Join' }
 ];
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+const currentPath = Astro.url.pathname.replace(base, '/');
 ---
 
 <!doctype html>
@@ -36,15 +40,15 @@ const nav = [
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/" aria-label="PLSec home">
-          <img src="/assets/img/vu.png" alt="" />
+        <a class="brand" href={withBase('/')} aria-label="PLSec home">
+          <img src={withBase('/assets/img/vu.png')} alt="" />
           <span>
             <strong>PLSec@VU</strong>
           </span>
         </a>
         <nav aria-label="Main navigation">
           {nav.map((item) => (
-            <a href={item.href} class={Astro.url.pathname === item.href ? 'active' : ''}>{item.label}</a>
+            <a href={withBase(item.href)} class={currentPath === item.href ? 'active' : ''}>{item.label}</a>
           ))}
         </nav>
         <button class="theme-toggle" type="button" aria-label="Toggle dark mode" data-theme-toggle>

@@ -4,7 +4,7 @@ role: Faculty
 order: 1
 email: kfl900@vu.nl
 website: https://gleissen.github.io
-photo: /assets/img/vu.png
+photo: /website/assets/img/vu.png
 interests:
   - programming languages
   - verification
