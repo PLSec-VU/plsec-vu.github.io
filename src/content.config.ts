@@ -30,7 +30,7 @@ const people = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/people' }),
   schema: z.object({
     name: z.string(),
-    role: z.enum(['Faculty', 'Postdoc', 'PhD Student', 'MSc Student', 'Researcher', 'Alumni']),
+    role: z.enum(['Faculty', 'Postdoc', 'PhD Student', 'MSc Student', 'Researcher', 'Collaborator', 'Alumni']),
     order: z.number().default(100),
     email: z.string().email().optional(),
     website: z.string().url().optional(),
