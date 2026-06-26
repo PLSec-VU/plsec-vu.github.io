@@ -41,10 +41,8 @@ const currentPath = Astro.url.pathname.replace(base, '/');
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href={withBase('/')} aria-label="PLSec home">
-          <img src={withBase('/assets/img/vu.png')} alt="" />
-          <span>
-            <strong>PLSec@VU</strong>
-          </span>
+          <img class="brand-logo brand-logo-light" src={withBase('/assets/img/plsec-white-lambdas.svg')} alt="" />
+          <img class="brand-logo brand-logo-dark" src={withBase('/assets/img/plsec-inverted-black-lambdas.svg')} alt="" />
         </a>
         <nav aria-label="Main navigation">
           {nav.map((item) => (

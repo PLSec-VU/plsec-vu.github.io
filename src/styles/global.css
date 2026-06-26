@@ -94,20 +94,30 @@ img {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
   color: var(--ink);
 }
 
-.brand img {
-  width: 42px;
-  height: 42px;
+.brand-logo {
+  display: block;
+  width: 120px;
+  height: auto;
   object-fit: contain;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 4px;
 }
 
-.brand span {
+.brand-logo-dark {
+  display: none;
+  background: transparent;
+}
+
+[data-theme='dark'] .brand-logo-light {
+  display: none;
+}
+
+[data-theme='dark'] .brand-logo-dark {
   display: block;
-  line-height: 1;
-  white-space: nowrap;
 }
 
 nav {
@@ -624,15 +634,6 @@ h3 {
 @media (max-width: 520px) {
   .container {
     width: min(var(--max), calc(100% - 28px));
-  }
-
-  .brand img {
-    width: 36px;
-    height: 36px;
-  }
-
-  .brand span {
-    font-size: 0.95rem;
   }
 
   .header-inner nav {
