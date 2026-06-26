@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   site: 'https://plsec-vu.github.io',
-  base: '/website',
+  base: '/',
   integrations: [mdx()],
   markdown: {
     shikiConfig: {
