@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import 'katex/dist/katex.min.css';
 
 const {
   title = 'PLSec at VU Amsterdam',
@@ -41,8 +42,8 @@ const currentPath = Astro.url.pathname.replace(base, '/');
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href={withBase('/')} aria-label="PLSec home">
-          <img class="brand-logo brand-logo-light" src={withBase('/assets/img/plsec-white-lambdas.svg')} alt="" />
-          <img class="brand-logo brand-logo-dark" src={withBase('/assets/img/plsec-inverted-black-lambdas.svg')} alt="" />
+          <img class="brand-logo brand-logo-light" src={withBase('/assets/img/logo/plsec-white-lambdas.svg')} alt="" />
+          <img class="brand-logo brand-logo-dark" src={withBase('/assets/img/logo/plsec-inverted-black-lambdas.svg')} alt="" />
         </a>
         <nav aria-label="Main navigation">
           {nav.map((item) => (

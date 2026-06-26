@@ -534,15 +534,27 @@ h3 {
   background: var(--code-bg) !important;
 }
 
+[data-theme='dark'] .prose .astro-code,
+[data-theme='dark'] .prose .astro-code span {
+  color: var(--shiki-dark) !important;
+}
+
 .prose code {
   background: var(--code-bg);
   border-radius: 4px;
   padding: 0.12em 0.28em;
+  color: var(--ink);
 }
 
 .prose pre code {
   background: transparent;
   padding: 0;
+}
+
+.prose .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
 }
 
 .prose iframe {
