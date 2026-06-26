@@ -1,6 +1,7 @@
 ---
 name: Kristina Sojakova
 role: Faculty
+summary: Assistant Professor working on programming languages, security and privacy, formal verification, and type theory.
 order: 2
 email: k.sojakova@vu.nl
 aliases:

@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 
@@ -28,8 +28,7 @@ const initials = (name: string) =>
           <>
             <h2 class="role-heading">{role}</h2>
             <div class="grid">
-              {group.map(async (person) => {
-                const { Content } = await render(person);
+              {group.map((person) => {
                 const personHref = person.data.role === 'Alumni' ? person.data.website : withBase(`/people/${person.id}/`);
                 const showPortrait = person.data.role !== 'Alumni';
                 return (
@@ -53,7 +52,7 @@ const initials = (name: string) =>
                       </div>
                     )}
                     <h3>{personHref ? <a href={personHref}>{person.data.name}</a> : person.data.name}</h3>
-                    <Content />
+                    <p>{person.data.summary}</p>
                     {person.data.email && <a href={`mailto:${person.data.email}`}>Contact</a>}
                     {person.data.website && <a href={person.data.website}>Personal website</a>}
                     {person.data.interests.length > 0 && (

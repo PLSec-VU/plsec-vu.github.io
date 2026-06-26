@@ -1,6 +1,7 @@
 ---
 name: Sabine Oechsner
 role: Collaborator
+summary: Assistant Professor working on formal security guarantees for cryptographic protocols.
 order: 3
 email: s.a.oechsner@vu.nl
 website: https://soechsner.de

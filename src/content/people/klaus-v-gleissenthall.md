@@ -1,6 +1,7 @@
 ---
 name: Klaus v. Gleissenthall
 role: Faculty
+summary: Researcher in programming languages, formal methods, and security.
 order: 1
 email: kfl900@vu.nl
 website: https://gleissen.github.io
