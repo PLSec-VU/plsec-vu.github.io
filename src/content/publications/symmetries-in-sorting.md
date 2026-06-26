@@ -9,10 +9,9 @@ tags:
   - type theory
   - sorting
   - Cubical Agda
+featured: true
 links:
-  - label: arXiv
-    url: https://arxiv.org/abs/2512.07349
-  - label: Extended version PDF
+  - label: PDF
     url: https://arxiv.org/pdf/2512.07349
 ---
 
