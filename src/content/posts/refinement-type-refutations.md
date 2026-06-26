@@ -8,7 +8,7 @@ authors:
 tags:
   - liquid types
   - counterexamples
-image: /website/assets/img/root.png
+image: /assets/img/root.png
 draft: false
 ---
 
@@ -28,13 +28,13 @@ Verification failures are often difficult to understand. Existing checkers tend 
 
 This is especially challenging for refinement type systems because their strength is modularity: the checker reasons from the information present in types rather than enumerating runtime traces.
 
-![Liquid Haskell error](/website/assets/img/lh-error.png)
+![Liquid Haskell error](/assets/img/lh-error.png)
 
 ## Haystack
 
 To make verification failures easier to debug, we built Haystack, a tool for explaining refinement typing failures. The accompanying Explorer interface lets users inspect a failed typing judgment and navigate the structure of the refutation.
 
-![Haystack Explorer root screen](/website/assets/img/root.png)
+![Haystack Explorer root screen](/assets/img/root.png)
 
 The key idea is a **refinement type refutation**: a mathematical object that explains why a typing derivation cannot be completed. It identifies both a path to the failing sub-expression and concrete variable instances that violate the generated constraints.
 

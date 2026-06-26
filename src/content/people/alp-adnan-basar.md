@@ -3,7 +3,7 @@ name: Alp Adnan Basar
 role: PhD Student
 summary: PhD student working on programming languages, security, and formal verification.
 order: 20
-photo: /website/assets/img/people/alp-basar.jpeg
+photo: /assets/img/people/alp-basar.jpeg
 interests:
   - programming languages
   - security

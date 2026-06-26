@@ -6,7 +6,7 @@ image: https://img.youtube.com/vi/5nZc6cUwqpY/hqdefault.jpg
 draft: false
 ---
 
-Pantomime, work by [Robin Webbers](/website/people/robin-webbers/), [Robert Schenck](https://rschenck.com), [Wind Wong](/website/people/wind-wong/), [Kristina Sojakova](/website/people/kristina-sojakova/), and [Klaus von Gleissenthall](/website/people/klaus-v-gleissenthall/), was accepted at PLDI 2026.
+Pantomime, work by [Robin Webbers](/people/robin-webbers/), [Robert Schenck](https://rschenck.com), [Wind Wong](/people/wind-wong/), [Kristina Sojakova](/people/kristina-sojakova/), and [Klaus von Gleissenthall](/people/klaus-v-gleissenthall/), was accepted at PLDI 2026.
 
 Robin presented the paper at PLDI 2026 in Boulder, Colorado. A recording of the talk is available on YouTube.
 

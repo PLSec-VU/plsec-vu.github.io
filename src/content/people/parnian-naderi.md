@@ -4,7 +4,7 @@ role: PhD Student
 summary: PhD student working on programming languages, security, and formal verification.
 order: 50
 website: https://simplytypedexistence.github.io
-photo: /website/assets/img/people/parnian-naderi.jpeg
+photo: /assets/img/people/parnian-naderi.jpeg
 aliases:
   - Parnian (Anna) Naderi
   - Anna Naderi

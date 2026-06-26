@@ -5,7 +5,7 @@ summary: Assistant Professor working on formal security guarantees for cryptogra
 order: 3
 email: s.a.oechsner@vu.nl
 website: https://soechsner.de
-photo: /website/assets/img/people/sabine-oechsner.jpg
+photo: /assets/img/people/sabine-oechsner.jpg
 interests:
     - cryptography
     - cryptographic protocols
