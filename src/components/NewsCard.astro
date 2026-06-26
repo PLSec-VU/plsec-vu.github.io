@@ -12,9 +12,15 @@ const date = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 const href = 'link' in item.data && item.data.link ? item.data.link : withBase(`/${basePath}/${item.id}/`);
+const image = 'image' in item.data ? item.data.image : undefined;
 ---
 
 <article class="card news-card">
+  {image && (
+    <a class="news-card-image" href={href} aria-label={item.data.title}>
+      <img src={image} alt="" loading="lazy" />
+    </a>
+  )}
   <p class="meta">{date}</p>
   <h3><a href={href}>{item.data.title}</a></h3>
   {'authors' in item.data && item.data.authors.length > 0 && (

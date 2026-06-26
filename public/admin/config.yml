@@ -36,6 +36,7 @@ collections:
       - { label: Date, name: date, widget: datetime }
       - { label: Authors, name: authors, widget: list, required: false }
       - { label: Link, name: link, widget: string, required: false }
+      - { label: Image, name: image, widget: image, required: false }
       - { label: Draft, name: draft, widget: boolean, default: false }
       - { label: Body, name: body, widget: markdown, required: false }
   - name: people
