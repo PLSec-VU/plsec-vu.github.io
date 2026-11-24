@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: PLSec-VU/website
+  repo: PLSec-VU/plsec-vu.github.io
   branch: main
 
 local_backend: true
