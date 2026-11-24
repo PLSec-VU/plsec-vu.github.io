@@ -1,0 +1,42 @@
+{
+  "name": "PLSec",
+  "heading": "PLSec@VU Amsterdam",
+  "fullName": "Programming Languages and Security",
+  "institution": "Vrije Universiteit Amsterdam",
+  "tagline": "Programming Languages and Security at Vrije Universiteit Amsterdam",
+  "description": "Research group website for programming languages, security, and software correctness at VU Amsterdam.",
+  "intro": [
+    "We study programming languages, verification, type systems, and systems security, building foundations and tools for secure and reliable software."
+  ],
+  "areas": [
+    {
+      "title": "Program verification",
+      "text": "Methods for proving correctness properties of real programs while keeping feedback useful for developers."
+    },
+    {
+      "title": "Types and semantics",
+      "text": "Foundations and implementations for type systems, refinement typing, and semantic reasoning."
+    },
+    {
+      "title": "Security and systems",
+      "text": "Language-based techniques that improve software security across compilers, runtimes, and hardware."
+    }
+  ],
+  "contact": {
+    "address": [
+      "Faculty of Science",
+      "Vrije Universiteit Amsterdam"
+    ]
+  },
+  "joinEmail": "kfl900@vu.nl",
+  "join": [
+    {
+      "title": "BSc and MSc students",
+      "text": "Prospective thesis students should include a short description of their interests, relevant coursework, and links to prior projects or writing."
+    },
+    {
+      "title": "PhD students",
+      "text": "Prospective PhD students should reach out with a CV, a short research idea, and a brief note explaining how their interests connect to the group."
+    }
+  ]
+}

@@ -6,11 +6,11 @@
   --panel-strong: #edf3f4;
   --accent: #006c67;
   --accent-strong: #004f4b;
-  --gold: #b98521;
+  --gold: #5d6978;
   --white: #ffffff;
   --code-bg: #f6f8fa;
   --max: 1120px;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 [data-theme='dark'] {
@@ -21,7 +21,7 @@
   --panel-strong: #17222d;
   --accent: #4fc7ba;
   --accent-strong: #8be1d7;
-  --gold: #d6a84a;
+  --gold: #a9b6c3;
   --white: #0b1117;
   --code-bg: #111a23;
 }
@@ -665,5 +665,291 @@ h3 {
   .team-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px 14px;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Refinements: same structure as before, with fewer boxes and labels.
+   ------------------------------------------------------------------ */
+
+body {
+  font-size: 1.0625rem;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+}
+
+h3 {
+  font-size: 1.08rem;
+}
+
+nav a {
+  border-radius: 0;
+  padding: 8px 2px;
+  margin: 0 8px;
+}
+
+nav a.active,
+nav a:hover {
+  background: none;
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.theme-toggle {
+  border-radius: 4px;
+}
+
+/* Hero: name and introduction on the left, the latest news item on the right. */
+.hero {
+  background: none;
+  padding: 64px 0 56px;
+}
+
+.hero-grid {
+  align-items: start;
+  grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+  gap: 56px;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  line-height: 1.08;
+  max-width: 12ch;
+}
+
+.hero-place {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.hero .lead {
+  color: color-mix(in srgb, var(--ink) 80%, var(--muted));
+  max-width: 36em;
+}
+
+.hero-latest .card {
+  border-top: 0;
+  padding-top: 0;
+}
+
+/* Sections are separated by a rule instead of alternating grey bands. */
+.section {
+  padding: 48px 0;
+}
+
+.section + .section {
+  padding-top: 0;
+}
+
+.section + .section > .container {
+  border-top: 1px solid var(--line);
+  padding-top: 40px;
+}
+
+.section.alt {
+  background: none;
+  border: 0;
+}
+
+.section-title {
+  margin-bottom: 24px;
+}
+
+.section-head {
+  align-items: baseline;
+  margin-bottom: 24px;
+}
+
+/* Research areas: three columns, each topped with a short accent rule. */
+.areas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.area {
+  border-top: 2px solid var(--accent);
+  padding-top: 14px;
+}
+
+.area p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+/* Cards become open blocks: a top rule, no box. */
+.card {
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  padding: 18px 0 0;
+}
+
+.news-card-image {
+  margin: 0 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.meta,
+.eyebrow {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.92rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.tags {
+  gap: 4px 14px;
+}
+
+.tags span {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: 0.88rem;
+}
+
+/* Publications: rows divided by rules. */
+.pub-list,
+.list {
+  gap: 0;
+}
+
+.publication {
+  gap: 4px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+
+.list .publication:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.publication .authors {
+  font-size: 0.98rem;
+}
+
+.pub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 0.95rem;
+}
+
+.publication .venue {
+  font-weight: 600;
+}
+
+.publication .tags {
+  margin-top: 4px;
+}
+
+/* People */
+.team-strip {
+  gap: 28px 20px;
+}
+
+.team-member img,
+.person-initials,
+.person-photo,
+.profile-photo {
+  border-radius: 4px;
+}
+
+.team-member h3 a {
+  color: var(--ink);
+}
+
+.team-member h3 a:hover {
+  color: var(--accent);
+}
+
+.person-role {
+  margin: 0 0 6px;
+  color: var(--muted);
+}
+
+/* Page headers on inner pages: no grey band. */
+.page-header {
+  background: none;
+  padding: 56px 0 32px;
+}
+
+.button {
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.project-feature {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 22px;
+}
+
+.project-feature-mark {
+  border-radius: 4px;
+}
+
+@media (max-width: 820px) {
+  .hero-grid,
+  .areas {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-grid {
+    gap: 36px;
+  }
+
+  nav a {
+    margin: 0 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+.news-card:has(.news-card-image) {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.page-header .lead {
+  max-width: 40em;
+}
+
+.role-heading {
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 820px) {
+  .header-inner .theme-toggle {
+    grid-row: 1;
+    grid-column: 2;
   }
 }

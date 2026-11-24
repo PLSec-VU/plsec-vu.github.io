@@ -52,7 +52,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('en', { year: 'numeri
         </div>
       )}
       <div>
-        <p class="eyebrow">{person.data.role}</p>
+        <p class="person-role">{person.data.role}</p>
         <h1>{person.data.name}</h1>
         {person.data.email && (
           <p class="lead"><a href={`mailto:${person.data.email}`}>Contact</a></p>

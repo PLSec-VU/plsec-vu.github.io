@@ -96,3 +96,36 @@ collections:
           - { label: Label, name: label, widget: string }
           - { label: URL, name: url, widget: string }
       - { label: Abstract, name: body, widget: markdown, required: false }
+  - name: settings
+    label: Site settings
+    files:
+      - name: site
+        label: Home page and contact details
+        file: src/data/site.json
+        format: json
+        fields:
+          - { label: Short name, name: name, widget: string }
+          - { label: Home page heading, name: heading, widget: string }
+          - { label: Full name, name: fullName, widget: string }
+          - { label: Institution, name: institution, widget: string }
+          - { label: Tagline under the logo, name: tagline, widget: string }
+          - { label: Description for search engines, name: description, widget: text }
+          - { label: Home page introduction (one entry per paragraph), name: intro, widget: list, field: { label: Paragraph, name: paragraph, widget: text } }
+          - label: Research areas
+            name: areas
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Text, name: text, widget: text }
+          - label: Contact
+            name: contact
+            widget: object
+            fields:
+              - { label: Address lines, name: address, widget: list }
+          - { label: Email the Join page's Contact us button sends to (not shown on the site), name: joinEmail, widget: string }
+          - label: Join page sections
+            name: join
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Text, name: text, widget: text }

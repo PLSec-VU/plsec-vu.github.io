@@ -1,23 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import site from '../data/site.json';
 ---
 
-<BaseLayout title="Join | PLSec at VU Amsterdam">
-  <PageHeader title="Join Us" intro="We welcome strong students interested in programming languages, verification, and security." />
+<BaseLayout title={`Join | ${site.name} at VU Amsterdam`}>
+  <PageHeader title="Join us" intro="We welcome strong students interested in programming languages, verification, and security." />
   <section class="section">
     <div class="container grid two">
-      <article class="card">
-        <h2>BSc / MSc Students</h2>
-        <p>Prospective thesis students should include a short description of their interests, relevant coursework, and links to prior projects or writing.</p>
-      </article>
-      <article class="card">
-        <h2>PhD Students</h2>
-        <p>Prospective PhD students should reach out with a CV, a short research idea, and a brief note explaining how their interests connect to the group.</p>
-      </article>
+      {site.join.map((item) => (
+        <article class="card">
+          <h2>{item.title}</h2>
+          <p>{item.text}</p>
+        </article>
+      ))}
     </div>
     <div class="container actions">
-      <a class="button" href="mailto:kfl900@vu.nl">Contact us</a>
+      <a class="button" href={`mailto:${site.joinEmail}`}>Contact us</a>
     </div>
   </section>
 </BaseLayout>
