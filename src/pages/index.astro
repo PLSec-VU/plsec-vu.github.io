@@ -36,8 +36,8 @@ const initials = (name: string) =>
     .join('')
     .slice(0, 2);
 
-// The newest news item is shown next to the introduction.
-const [latest, ...olderNews] = news;
+// The newest news item is also shown next to the introduction.
+const latest = news[0];
 ---
 
 <BaseLayout>
@@ -138,7 +138,7 @@ const [latest, ...olderNews] = news;
     </section>
   )}
 
-  {olderNews.length > 0 && (
+  {news.length > 0 && (
     <section class="section">
       <div class="container">
         <div class="section-head">
@@ -146,7 +146,7 @@ const [latest, ...olderNews] = news;
           <a href={withBase('/news/')}>All news</a>
         </div>
         <div class="grid">
-          {olderNews.map((item) => <NewsCard item={item} basePath="news" />)}
+          {news.map((item) => <NewsCard item={item} basePath="news" />)}
         </div>
       </div>
     </section>
