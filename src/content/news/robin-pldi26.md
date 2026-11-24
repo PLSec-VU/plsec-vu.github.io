@@ -3,6 +3,7 @@ title: Robin at PLDI26
 summary: Robin presented Pantomime at PLDI 2026 in Boulder, Colorado, USA
 date: 2026-06-25
 image: https://img.youtube.com/vi/5nZc6cUwqpY/hqdefault.jpg
+showImageOnPage: false
 draft: false
 ---
 

@@ -10,6 +10,8 @@ const news = defineCollection({
     authors: z.array(z.string()).default([]),
     link: z.string().url().optional(),
     image: z.string().optional(),
+    // Set to false to use the image only as the thumbnail in lists and on the home page.
+    showImageOnPage: z.boolean().default(true),
     draft: z.boolean().default(false)
   })
 });

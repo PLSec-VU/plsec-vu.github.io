@@ -10,6 +10,12 @@ export async function getStaticPaths() {
 
 const { item } = Astro.props;
 const { Content } = await render(item);
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+// Skip the image if the post's text already includes it.
+const image = item.data.showImageOnPage && item.data.image && !item.body?.includes(item.data.image)
+  ? (item.data.image.startsWith('/') ? withBase(item.data.image) : item.data.image)
+  : undefined;
 const date = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(item.data.date);
 ---
 
@@ -26,6 +32,7 @@ const date = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day
     </section>
     <section class="section">
       <div class="container prose">
+        {image && <img class="news-hero-image" src={image} alt="" />}
         <Content />
       </div>
     </section>
